@@ -46,4 +46,49 @@ When to Use Pass by Value?
 As in pass-by value in JavaScript, a new copy of the variable is created, and any changes made in the new variable are independent of the original variable, so it is useful when we want to keep track of the initial variable and don't want to lose its value.
 When to Use Pass by Reference?
 When we are passing arguments of large size, it is better to use pass-by-reference in JavaScript as no separate copy is made in the called function, so memory is not wasted, and hence the program is more efficient.
+
+function adds(x,y) {
+ 
+  if(new.target) {
+    throw 'this add function cont be called constructor'
+  }
+  return x + y;
+}
+console.log(add.length);
+console.log(add.prototype);
+let re = adds(10,10);
+console.log(re);
+let obj = new adds(2,3);
+console.log(obj);
 */
+let cat = {
+  type: 'Cat',
+  sound: 'Mow',
+};
+let dog = {
+  type: 'Dog',
+  sound: 'Bow',
+};
+const says = function (messgage) {
+  console.log('Hi ' + messgage);
+  console.log(this.type + ' says ' + this.sound);
+};
+says.apply(cat, ['what cat says']);
+says.apply(dog, ['what dog says']);
+says.call(cat, 'What does a cat say?');
+says.call(dog, 'What does a dog say?');
+
+let car = {
+  speed: 5,
+  start: function () {
+    console.log('starts with ' + this.speed + 'km/h');
+  },
+};
+let airfly = {
+  speed: 10,
+  fly: function () {
+    console.log('flying');
+  },
+};
+let taxiing = car.start.bind(airfly);
+taxiing();
